@@ -185,18 +185,15 @@ def player_numbers(team_name)
   return jersey_numbers
 end
 
-def player_stats(player_name)
-  player_stats = {}
-  game_hash.each do |team, team_details_hash|
-    team_details_hash[:players].each do |stats|
-
-      if stats[:name] == player_name
-        stats.delete(:name)
-        player_stats = stats
-      end
-    end
+def player_stats(player_name, hashketball)
+  player_name.capitalize!
+  if hashketball[:home][:players].include?(player_name)
+    hashketball[:home][:players][player_name][:stats]
+  elsif hashketball[:away][:players].include?(player_name)
+    hashketball[:away][:players][player_name][:stats]
+  else
+    "No player found."
   end
-  player_stats
 end
 
 def big_shoe_rebounds
