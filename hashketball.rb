@@ -185,7 +185,7 @@ def player_numbers(team_name)
   return jersey_numbers
 end
 
-def player_stats(name) #takes argument of player name and returns hash of players stats
+def player_stats(name) 
   hash = game_hash
   hash.each do |teams_playing, data|
     data[:players].each do |player_name, player_data|
