@@ -200,7 +200,6 @@ def player_stats(player_name)
     }
   }
   
-  player_stats.delete(:player_name)
   player_stats
 end 
 
