@@ -187,17 +187,22 @@ end
 
 def player_stats(player_name)
   player_stats = {}
-  game_hash.each do |team, team_details_hash|
-    team_details_hash[:players].each do |stats|
-
-      if stats[:name] == player_name
-        stats.delete(:name)
-        player_stats = stats
-      end
-    end
-  end
+  
+  game_hash.map {|team, team_hash|
+    team_hash.map {|attribute, data|
+      if attribute == :players 
+        data.map {|player_hash|
+          if player_hash[:player_name] == player_name
+            player_stats = player_hash
+          end 
+        }
+      end 
+    }
+  }
+  
+  player_stats.delete(:player_name)
   player_stats
-end
+end 
 
 def big_shoe_rebounds
   shoe_size = 0 
