@@ -185,15 +185,18 @@ def player_numbers(team_name)
   return jersey_numbers
 end
 
-def player_stats(name) 
-  hash = game_hash
-  hash.each do |teams_playing, data|
-    data[:players].each do |player_name, player_data|
-      if player_name == name
-        return hash[teams_playing][:players][name]
-      end 
-    end 
-  end 
+def player_stats(player_name)
+  player_stats = {}
+  game_hash.each do |team, team_details_hash|
+    team_details_hash[:players].each do |stats|
+
+      if stats[:name] == player_name
+        stats.delete(:name)
+        player_stats = stats
+      end
+    end
+  end
+  player_stats
 end
 
 def big_shoe_rebounds
